@@ -9,18 +9,16 @@ var app = {
     },
 
     initializeMap: function() {
-        var map = new ol.Map({
-                target: 'map',
-                layers: [
-                  new ol.layer.Tile({
-                    source: new ol.source.MapQuest({layer: 'sat'})
-                  })
-                ],
-                view: new ol.View({
-                  center: ol.proj.transform([51.39, 39.10], 'EPSG:4326', 'EPSG:3857'),
-                  zoom: 4
-                })
-              });
+        var long = 39.1843;
+        var lat = 51.67204;
+        var map = new ol.Map({target: 'map'});
+        var osmSource = new ol.source.OSM();
+        var osmLayer = new ol.layer.Tile({source: osmSource});
+        map.addLayer(osmLayer);
+        var view = new ol.View();
+        view.setCenter(ol.proj.transform([long, lat], 'EPSG:4326', 'EPSG:3857'));
+        view.setZoom(15);
+        map.setView(view);
     }
 };
 
